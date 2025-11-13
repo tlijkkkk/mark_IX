@@ -1,5 +1,6 @@
 package com.practice.lc
 
+import com.practice.lc.recursion.kt.Leetcode394
 import org.junit.Test
 import org.junit.Assert.*
 

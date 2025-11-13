@@ -10,7 +10,7 @@ val generatedAssetsDir = layout.buildDirectory.dir("generated/assets")
 val copyPracticeAssets = tasks.register<Copy>("copyPracticeSourceCodeFilesToAssets") {
     val srcDir = projectDir.resolve("src/main/java")
     from(srcDir) {
-        include("com/practice/lc/**/*.kt") // include the `lc` folder and its Kotlin files
+        include("com/practice/lc/**/*.kt", "com/practice/lc/**/*.java") // include the `lc` folder and its Kotlin files
     }
     into(generatedAssetsDir.get().asFile)
     doFirst { generatedAssetsDir.get().asFile.mkdirs() } // ensure destination directory exists
@@ -26,7 +26,7 @@ android {
 
     defaultConfig {
         applicationId = "com.practice.leetcode"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
@@ -51,12 +51,20 @@ android {
             )
         }
     }
+
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
+
+    // Controls emitted JVM bytecode version (classfile major version, e.g., "17")
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
+    }
+
+    // Tells Gradle which Java toolchain (JDK) to use for compilation, kapt, tests, etc.
+    kotlin {
+        jvmToolchain(17)
     }
 
     sourceSets["main"].assets.srcDirs(generatedAssetsDir.get().asFile)

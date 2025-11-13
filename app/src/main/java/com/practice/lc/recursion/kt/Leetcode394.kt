@@ -1,7 +1,7 @@
-package com.practice.lc
+package com.practice.lc.recursion.kt
 
-import kotlin.text.buildString
 import java.lang.StringBuilder
+import kotlin.text.iterator
 
 class Leetcode394 {
     public fun decodeString(s: String): String {

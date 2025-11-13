@@ -48,7 +48,7 @@ class AssetRepository(private val assets: AssetManager) {
         return try {
             assets.open(filePath).bufferedReader().use { it.readText() }
         } catch (e: Exception) {
-            "Error reading file: ${e.message}"
+            "Error reading file path: ${e.message}"
         }
     }
 }
