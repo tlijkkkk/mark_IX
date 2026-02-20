@@ -24,7 +24,7 @@ data class UiState(
 
 class ProblemListViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val repo = AssetRepository(application.assets)
+    private val repo = GitHubRepository
 
     private val _state = MutableStateFlow(UiState(isLoading = true))
     val state: StateFlow<UiState> = _state

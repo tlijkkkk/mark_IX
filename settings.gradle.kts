@@ -22,5 +22,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Leetcode"
+rootProject.name = "Leetcode Go"
 include(":app")

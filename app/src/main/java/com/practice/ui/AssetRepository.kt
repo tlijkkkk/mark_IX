@@ -7,12 +7,12 @@ import android.content.res.AssetManager
  * @param assets AssetManager to access app assets.
  * @param basePath Base path within assets folder to look for files. If empty, it means the base assets folder itself.
  */
-class AssetRepository(private val assets: AssetManager) {
-    fun listFiles(basePath: String = "com/practice/lc"): List<String> {
+class AssetRepository(private val assets: AssetManager) : SourceCodeRepository {
+    override fun listFiles(path: String): List<String> {
         return try {
             val result = mutableListOf<String>()
             val stack = ArrayDeque<String>()
-            stack.addLast(basePath)
+            stack.addLast(path)
             while (stack.isNotEmpty()) {
                 val currentBasePath = stack.removeLast()
                 val items = assets.list(currentBasePath) ?: continue
@@ -36,17 +36,9 @@ class AssetRepository(private val assets: AssetManager) {
         }
     }
 
-    fun readFileSimple(fileName: String): String {
+    override fun readFile(path: String): String {
         return try {
-            assets.open(fileName).bufferedReader().use { it.readText() }
-        } catch (e: Exception) {
-            "Error reading file: ${e.message}"
-        }
-    }
-
-    fun readFile(filePath: String): String {
-        return try {
-            assets.open(filePath).bufferedReader().use { it.readText() }
+            assets.open(path).bufferedReader().use { it.readText() }
         } catch (e: Exception) {
             "Error reading file path: ${e.message}"
         }
